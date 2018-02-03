@@ -1,0 +1,11 @@
+--- ivysettings.xml	2018-02-03 14:01:03.866144700 -0800
++++ ivysettings2.xml	2018-02-03 14:00:03.163622000 -0800
+@@ -30,7 +30,7 @@
+ 
+ 	<resolvers>
+ 		<url name="jedit-plugins">
+-			<artifact pattern="jar:http://downloads.sourceforge.net/project/jedit-plugins/[artifact]/[revision]/[artifact]-[revision]-bin.zip!/[artifact].jar" />
++			<artifact pattern="jar:https://downloads.sourceforge.net/project/jedit-plugins/[artifact]/[revision]/[artifact]-[revision]-bin.zip!/[artifact].jar" />
+ 		</url>
+ 	</resolvers>
+ 	<modules>

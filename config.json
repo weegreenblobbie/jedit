@@ -1,0 +1,7 @@
+{
+    "ant_tarball" : "apache-ant-1.10.1-bin.zip",
+    "jedit_tarball" : "jedit5.3.0source.tar.bz2",
+    "unzip_exe" : "C:/Program Files/Git/usr/bin/unzip.exe",
+    "tar_exe" : "tar",
+    "jdk_dir" : "C:/Program Files/Java/jdk1.8.0_162"
+}
