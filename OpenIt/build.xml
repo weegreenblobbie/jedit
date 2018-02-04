@@ -9,13 +9,15 @@
 	<property name="jedit.plugins.dir" value="${install.dir}" />
 	<property name="dist.target" value="build" />
 	<property name="src.dir" location="src" />
+	<property name="docs.dir" location="docs" />
+<!--~ 	<property name="jar.name" location="OpenIt.jar" />  ~-->
 <!--~ 	<import file="${build.support}/plugin-build.xml" />  ~-->
 
 
 	<!-- define the class path -->
     <path id="project.class.path">
         <pathelement location="${jedit.install.dir}/jedit.jar"/>
-        <pathelement location="${install.dir}/ProjectViewer.jar"/>
+<!--~         <pathelement location="${install.dir}/ProjectViewer.jar"/>  ~-->
         <pathelement location="${src.dir}"/>
     </path>
 
@@ -35,7 +37,7 @@
         <mkdir dir="${install.dir}"/>
 
     <!-- create jar file -->
-        <jar jarfile="${install.dir}/${jar.name}">
+        <jar jarfile="${install.dir}/OpenIt.jar">
 
       <!-- add compiled classes to jar -->
             <fileset dir="${build.dir}"/>
