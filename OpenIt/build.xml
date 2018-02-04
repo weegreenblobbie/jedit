@@ -1,23 +1,17 @@
 <?xml version="1.0"?>
 
-<!--
-     This is a build.xml file for building the OpenIt plugin.
-     The 'dist' target compiles the plugin and creates the JAR file.
--->
-
 <project name="OpenIt" default="dist" basedir=".">
-  <!-- properties -->
-    <property file="build.properties"/>
-    <property file="../build.properties"/>
-    <property file="${user.home}/.build.properties"/>
-    <property file="${user.home}/build.properties"/>
 
-    <property name="jar.name" value="${ant.project.name}.jar"/>
-    <property name="src.dir" value="src"/>
-    <property name="build.dir" value="build"/>
-    <property name="install.dir" value=".."/>
-    <property name="docs.dir" value="docs"/>
-	
+	<property file="build.properties"/>
+	<property file="../jEdit/build.properties"/>
+	<property file="${user.home}/.build.properties"/>
+	<property file="${user.home}/build.properties"/>
+	<property name="jedit.plugins.dir" value="${install.dir}" />
+	<property name="dist.target" value="build" />
+	<property name="src.dir" location="src" />
+<!--~ 	<import file="${build.support}/plugin-build.xml" />  ~-->
+
+
 	<!-- define the class path -->
     <path id="project.class.path">
         <pathelement location="${jedit.install.dir}/jedit.jar"/>
@@ -35,17 +29,17 @@
         </javac>
     </target>
 
-    <target name="dist" depends="compile">
-    
+	<target name="dist" depends="compile">
+
     <!-- create installation directory -->
         <mkdir dir="${install.dir}"/>
-    
+
     <!-- create jar file -->
         <jar jarfile="${install.dir}/${jar.name}">
-      
+
       <!-- add compiled classes to jar -->
             <fileset dir="${build.dir}"/>
-			
+
       <!-- add any required files from the source directory (not java files) -->
             <fileset dir="${src.dir}">
                 <include name="actions.xml"/>
@@ -54,7 +48,7 @@
                 <include name="**/*.jpg"/>
                 <include name="**/*.gif"/>
             </fileset>
-      
+
       <!-- add any documentation -->
             <fileset dir="${docs.dir}">
                 <include name="**/*.xml"/>
@@ -67,7 +61,7 @@
 
         </jar>
     </target>
-	
+
   <!-- cleans build directory -->
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -76,4 +70,7 @@
         </delete>
     </target>
 
+
 </project>
+
+<!-- :indentSize=4:lineSeparator=\n:noTabs=false:tabSize=4: -->
