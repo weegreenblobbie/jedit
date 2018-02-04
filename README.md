@@ -8,15 +8,15 @@ How to build jEdit 5.3.0 on Windows 10 64-bit
 1. Download the [Apache Ant](http://mirror.olnevhost.net/pub/apache//ant/binaries/apache-ant-1.10.1-bin.zip) to the local dir
 1. Inspect `config.json` to ensure paths and names are correct.
 
-Then just run the build script:
+To build jEdit and the OpenIt plugin:
 
     python build.py
     # ...
     BUILD SUCCESSFUL
     Total time: 1 minute 35 seconds
 
-You may need to exit an existing jEdit session before running the one you built:
+To run the newly built jedit.jar:
 
-    cd jEdit\build && jedit.jar
+    python build.py --run
 
-Click on Help -> About jEdit to check the version.
+

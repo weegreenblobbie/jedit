@@ -1,15 +1,16 @@
 # OpenIt jEdit Plugin
 # Author: Matt Etheridge
 # Maintainer: Denis Koryavov
+# Hacker: Nick Hilton
 
 # general plugin information
 plugin.org.etheridge.openit.OpenItPlugin.name=OpenIt
-plugin.org.etheridge.openit.OpenItPlugin.author=Denis Koryavov, Matt Etheridge
-plugin.org.etheridge.openit.OpenItPlugin.version=1.5.2
+plugin.org.etheridge.openit.OpenItPlugin.author=Nick Hilton, Denis Koryavov, Matt Etheridge
+plugin.org.etheridge.openit.OpenItPlugin.version=1.5.3
 plugin.org.etheridge.openit.OpenItPlugin.docs=OpenIt.html
-plugin.org.etheridge.openit.OpenItPlugin.depend.0=jdk 1.5
-plugin.org.etheridge.openit.OpenItPlugin.depend.1=jedit 04.03.17.00
-plugin.org.etheridge.openit.OpenItPlugin.depend.2=optional plugin projectviewer.ProjectViewerPlugin 2.9
+plugin.org.etheridge.openit.OpenItPlugin.depend.0=jdk 1.8
+plugin.org.etheridge.openit.OpenItPlugin.depend.1=jedit 05.03.00.00
+#~plugin.org.etheridge.openit.OpenItPlugin.depend.2=optional plugin projectviewer.ProjectViewerPlugin 2.9
 plugin.org.etheridge.openit.OpenItPlugin.usePluginHome=true
 plugin.org.etheridge.openit.OpenItPlugin.description=\
 	The OpenIt plug-in provides a quick and easy way to open files in jEdit.
