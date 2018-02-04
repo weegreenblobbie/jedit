@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<!--
+     This is a build.xml file for building the FinishHim plugin.
+
+     The 'dist' target compiles the plugin and creates the JAR file.
+-->
+
+<project name="finish-him" default="dist" basedir=".">
+	<property file="../build.properties"/>
+	<property file="build.properties"/>
+
+	<property name="jar.name"  value="${ant.project.name}.jar"/>
+	<property name="version"  value="0.9"/>
+
+	<property name="src.dir" value="."/>
+	<property name="build.dir" value="build"/>
+
+	<property environment="env"/>
+
+	<path id="scala.classpath">
+		<pathelement location="${jedit.plugins.dir}/ScalacPlugin.jar"/>
+	</path>
+
+	<path id="project.classpath">
+		<path refid="scala.classpath" />
+		<pathelement location="${jedit.install.dir}/jedit.jar"/>
+		<pathelement location="${jedit.plugins.dir}/ScalacPlugin.jar"/>
+	</path>
+
+	<target name="init">
+		<!-- Scala compiler task -->
+		<taskdef resource="scala/tools/ant/antlib.xml">
+			<classpath refid="scala.classpath" />
+		</taskdef>
+	</target>
+
+	<target name="build" depends="init">
+		<mkdir dir="${build.dir}"/>
+		<scalac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			classpathref="project.classpath"
+			deprecation="on"
+		>
+		</scalac>
+	</target>
+
+
+	<target name="dist" depends="build">
+		<jar jarfile="${install.dir}/${jar.name}">
+			<fileset dir="${build.dir}"/>
+			<fileset dir="${src.dir}">
+				<include name="actions.xml"/>
+				<include name="**/*.props"/>
+				<include name="**/*.html"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+		<delete file="${srcfile}"/>
+		<delete>
+			<fileset dir="." includes="**/*~" defaultexcludes="no"/>
+		</delete>
+	</target>
+</project>
