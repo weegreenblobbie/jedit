@@ -7,47 +7,37 @@
 -->
 
 <project name="finish-him" default="dist" basedir=".">
-	<property file="../build.properties"/>
+	<property file="../jEdit/build.properties"/>
 	<property file="build.properties"/>
 
 	<property name="jar.name"  value="${ant.project.name}.jar"/>
-	<property name="version"  value="0.9"/>
+	<property name="version"  value="0.10"/>
 
 	<property name="src.dir" value="."/>
 	<property name="build.dir" value="build"/>
 
 	<property environment="env"/>
 
-	<path id="scala.classpath">
-		<pathelement location="${jedit.plugins.dir}/ScalacPlugin.jar"/>
-	</path>
 
-	<path id="project.classpath">
-		<path refid="scala.classpath" />
-		<pathelement location="${jedit.install.dir}/jedit.jar"/>
-		<pathelement location="${jedit.plugins.dir}/ScalacPlugin.jar"/>
-	</path>
-
-	<target name="init">
-		<!-- Scala compiler task -->
-		<taskdef resource="scala/tools/ant/antlib.xml">
-			<classpath refid="scala.classpath" />
-		</taskdef>
-	</target>
-
-	<target name="build" depends="init">
-		<mkdir dir="${build.dir}"/>
-		<scalac
-			srcdir="${src.dir}"
-			destdir="${build.dir}"
-			classpathref="project.classpath"
-			deprecation="on"
-		>
-		</scalac>
-	</target>
+    <path id="project.class.path">
+        <pathelement location="${jedit.install.dir}/jedit.jar"/>
+        <pathelement location="${src.dir}"/>
+    </path>
 
 
-	<target name="dist" depends="build">
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" deprecation="on" includeJavaRuntime="yes">
+            <classpath refid="project.class.path"/>
+        </javac>
+    </target>
+
+
+	<target name="dist" depends="compile">
 		<jar jarfile="${install.dir}/${jar.name}">
 			<fileset dir="${build.dir}"/>
 			<fileset dir="${src.dir}">
@@ -57,6 +47,7 @@
 			</fileset>
 		</jar>
 	</target>
+
 
 	<target name="clean">
 		<delete dir="${build.dir}"/>
