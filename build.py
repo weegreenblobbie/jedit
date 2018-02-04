@@ -65,9 +65,6 @@ def extract_jedit_tarball(config):
     assert os.path.isdir('jEdit'), "Failed to extract jEdit tarball!"
 
 
-
-
-
 def main():
 
     parser = argparse.ArgumentParser()
@@ -77,6 +74,20 @@ def main():
         type = str,
         default = 'config.json',
         help = 'The input config.json to process'
+    )
+
+    parser.add_argument(
+        '--run',
+        action = "store_true",
+        default = False,
+        help = 'Run the newly built jedit.jar'
+    )
+
+    parser.add_argument(
+        '--test',
+        action = "store_true",
+        default = False,
+        help = 'Run the test suite on jEdit'
     )
 
     args = parser.parse_args()
@@ -112,6 +123,36 @@ def main():
     run_cmd(cmd)
 
     assert os.path.isfile("jEdit/build/jedit.jar"), "Failed to build jedit.jar!"
+
+    #-------------------------------------------------------------------------
+    # test jEdit
+
+    if args.test:
+
+        cmd = 'cd jEdit && "..\{ant_exe}" test'.format(**config)
+
+        run_cmd(cmd)
+
+    #-------------------------------------------------------------------------
+    # generate docs jEdit
+
+    cmd = 'cd jEdit && "..\{ant_exe}" docs-html'.format(**config)
+
+    run_cmd(cmd)
+
+    #-------------------------------------------------------------------------
+    # build OpenIt
+
+    cmd = 'cd OpenIt && "..\{ant_exe}"'.format(**config)
+
+    run_cmd(cmd)
+
+    #-------------------------------------------------------------------------
+    # run jEdit
+
+    cmd = 'cd jEdit && "..\{ant_exe}" run'.format(**config)
+
+    run_cmd(cmd)
 
 
 
