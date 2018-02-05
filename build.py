@@ -148,6 +148,13 @@ def main():
     run_cmd(cmd)
 
     #-------------------------------------------------------------------------
+    # build FinishHim
+
+    cmd = 'cd FinishHim && "..\{ant_exe}"'.format(**config)
+
+    run_cmd(cmd)
+
+    #-------------------------------------------------------------------------
     # run jEdit
 
     cmd = 'cd jEdit && "..\{ant_exe}" run'.format(**config)

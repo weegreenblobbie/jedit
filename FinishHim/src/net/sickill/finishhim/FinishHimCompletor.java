@@ -19,28 +19,20 @@ import java.util.Set;
 public class FinishHimCompletor
 {
     public View view;
-    public String noWordSep;
-    public ArrayList<String> wordList;
+    public String noWordSep = "_";
+    public ArrayList<String> wordList = new ArrayList<String>();
     public Buffer buffer;
     public JEditTextArea textArea;
-    public int caret;
-    public String prefix;
-    public int prefixLength;
-    public int suggestedWordLength;
-    public int caretLine;
-    public int nextWordIndex;
+    public int caret = 0;
+    public String prefix = "";
+    public int prefixLength = 0;
+    public int suggestedWordLength = 0;
+    public int caretLine = 0;
+    public int nextWordIndex = 0;
 
     public FinishHimCompletor(View view_)
     {
         view = view_;
-        noWordSep = "_";
-        wordList = new ArrayList<String>();
-        caret = 0;
-        prefix = "";
-        prefixLength = 0;
-        suggestedWordLength = 0;
-        caretLine = 0;
-        nextWordIndex = 0;
     }
 
     public boolean firstInvocation()
@@ -50,7 +42,7 @@ public class FinishHimCompletor
 
     public void setup()
     {
-        log("setup()");
+        log("    setup()");
         nextWordIndex = 0;
         buffer = view.getBuffer();
         textArea = view.getTextArea();
@@ -59,12 +51,12 @@ public class FinishHimCompletor
 
         if(findPrefix())
         {
-            log("found prefix: " + prefix);
+            log("    found prefix: " + prefix);
             buildWordList();
         }
         else
         {
-            log("empty prefix, leaving");
+            log("    empty prefix, leaving");
             wordList = new ArrayList<String>();
         }
     }
@@ -72,6 +64,8 @@ public class FinishHimCompletor
     public void complete()
     {
         log("complete()");
+
+        boolean b = firstInvocation();
 
         if(firstInvocation())
         {
@@ -92,12 +86,6 @@ public class FinishHimCompletor
         {
             String nextWord = wordList.get(nextWordIndex);
 
-            log("    nextWord = '" + nextWord + "'");
-
-            log("        caret = " + caret);
-            log("        prefixLength = " + prefixLength);
-            log("        suggestedWordLength = " + suggestedWordLength);
-
             textArea.setSelection(
                 new Selection.Range(
                     caret,
@@ -106,8 +94,6 @@ public class FinishHimCompletor
             );
 
             String tmp = nextWord.substring(prefixLength);
-
-            log("    tmp = '" + tmp + "'");
 
             textArea.replaceSelection(nextWord.substring(prefixLength));
 
@@ -182,8 +168,6 @@ public class FinishHimCompletor
 
     public void buildWordList()
     {
-        log("buildWordList()");
-
         wordList = reverse(getWordsFromBuffer(buffer, 0, caret));
 
         HashSet<String> set = new HashSet<String>();
@@ -219,8 +203,6 @@ public class FinishHimCompletor
 
     public boolean findPrefix()
     {
-        log("findPrefix()");
-
         String line = buffer.getLineSegment(caretLine).toString();
 
         int dot = caret - buffer.getLineStartOffset(caretLine);
