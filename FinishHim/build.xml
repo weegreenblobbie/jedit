@@ -6,7 +6,7 @@
      The 'dist' target compiles the plugin and creates the JAR file.
 -->
 
-<project name="finish-him" default="dist" basedir=".">
+<project name="FinishHim" default="dist" basedir=".">
 	<property file="../jEdit/build.properties"/>
 	<property file="build.properties"/>
 
